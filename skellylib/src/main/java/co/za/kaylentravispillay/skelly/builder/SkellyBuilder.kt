@@ -31,11 +31,22 @@ class SkellyBuilder {
     }
 
     fun verticalBoneStack(lambda: VerticalBoneStackBuilder.() -> Unit) {
-        mBoneCollection.add(VerticalBoneStackBuilder().apply(lambda).build())
+        val verticalStack = VerticalBoneStackBuilder().apply {
+            if (this@SkellyBuilder.mBoneBackgroundColor != -1) {
+                backgroundColorRes { this@SkellyBuilder.mBoneBackgroundColor }
+            }
+        }.apply(lambda).build()
+
+        mBoneCollection.add(verticalStack)
     }
 
     fun horizontalBoneStack(lambda: HorizontalBoneStackBuilder.() -> Unit) {
-        mBoneCollection.add(HorizontalBoneStackBuilder().apply(lambda).build())
+        val horizontalStack = HorizontalBoneStackBuilder().apply {
+            if (this@SkellyBuilder.mBoneBackgroundColor != -1) {
+                backgroundColorRes { this@SkellyBuilder.mBoneBackgroundColor }
+            }
+        }.apply(lambda).build()
+        mBoneCollection.add(horizontalStack)
     }
 
     internal fun build(context: Context): List<Bone> {
