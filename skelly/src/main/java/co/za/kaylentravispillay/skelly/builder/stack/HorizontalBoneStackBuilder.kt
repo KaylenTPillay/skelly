@@ -1,5 +1,6 @@
 package co.za.kaylentravispillay.skelly.builder.stack
 
+import androidx.annotation.ColorRes
 import co.za.kaylentravispillay.skelly.bone.marrow.BoneMarrow
 import co.za.kaylentravispillay.skelly.builder.bone.BoneBuilder
 import co.za.kaylentravispillay.skelly.builder.annotation.SkellyDsl
@@ -13,20 +14,33 @@ class HorizontalBoneStackBuilder {
     private var marginStart: Int = 0
     private var marginTop: Int = 0
 
+    @ColorRes private var backgroundColorRes: Int = -1
+
     private val mBoneCollection: MutableList<BoneConstructionType> = mutableListOf()
 
     fun bone(lambda: BoneBuilder.() -> Unit = {}) {
-        mBoneCollection.add(BoneBuilder().apply(lambda).build())
+        val bone = BoneBuilder().apply {
+            if (this@HorizontalBoneStackBuilder.backgroundColorRes != -1) {
+                backgroundColorRes { this@HorizontalBoneStackBuilder.backgroundColorRes }
+            }
+        }.apply(lambda).build()
+        mBoneCollection.add(bone)
     }
 
     fun verticalBoneStack(lambda: VerticalBoneStackBuilder.() -> Unit) {
-        mBoneCollection.add(VerticalBoneStackBuilder().apply(lambda).build())
+        val stack = VerticalBoneStackBuilder().apply {
+            if (this@HorizontalBoneStackBuilder.backgroundColorRes != -1) {
+                backgroundColorRes { this@HorizontalBoneStackBuilder.backgroundColorRes }
+            }
+        }.apply(lambda).build()
+        mBoneCollection.add(stack)
     }
 
     fun width(lambda: () -> Int) { this.width = lambda() }
     fun height(lambda: () -> Int) { this.height = lambda() }
     fun marginStart(lambda: () -> Int) { this.marginStart = lambda() }
     fun marginTop(lambda: () -> Int) { this.marginTop = lambda() }
+    fun backgroundColorRes(lambda: () -> Int) { this.backgroundColorRes = lambda() }
 
     fun build() = BoneConstructionType.HorizontalBoneStack(
         marrow = BoneMarrow(

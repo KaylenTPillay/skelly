@@ -1,6 +1,7 @@
 package co.za.kaylentravispillay.skelly.builder
 
 import android.content.Context
+import androidx.annotation.ColorRes
 import co.za.kaylentravispillay.skelly.bone.Bone
 import co.za.kaylentravispillay.skelly.bone.impl.BasicBone
 import co.za.kaylentravispillay.skelly.bone.impl.BasicRibHorizontalStack
@@ -14,9 +15,19 @@ import co.za.kaylentravispillay.skelly.builder.type.BoneConstructionType
 @SkellyDsl
 class SkellyBuilder {
     private val mBoneCollection: MutableList<BoneConstructionType> = mutableListOf()
+    private var mBoneBackgroundColor: Int = -1
 
     fun bone(lambda: BoneBuilder.() -> Unit = {}) {
-        mBoneCollection.add(BoneBuilder().apply(lambda).build())
+        val bone = BoneBuilder().apply {
+            if (this@SkellyBuilder.mBoneBackgroundColor != -1) {
+                backgroundColorRes { this@SkellyBuilder.mBoneBackgroundColor }
+            }
+        }.apply(lambda).build()
+        mBoneCollection.add(bone)
+    }
+
+    fun boneBackgroundColorRes(lambda: () -> Int) {
+        mBoneBackgroundColor
     }
 
     fun verticalBoneStack(lambda: VerticalBoneStackBuilder.() -> Unit) {
