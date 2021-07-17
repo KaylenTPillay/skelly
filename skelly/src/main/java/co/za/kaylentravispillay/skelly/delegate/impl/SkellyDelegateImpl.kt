@@ -54,6 +54,11 @@ internal class SkellyDelegateImpl : SkellyDelegate {
         canvas?.restore()
     }
 
+    override fun setSkeleton(bones: List<Bone>) {
+        mBones.clear()
+        mBones.addAll(bones)
+    }
+
     private fun setChildDisplacement(rect: RectF?) {
         if (rect == null) {
             mBoneDisplacementPoint.set(0F, 0F)

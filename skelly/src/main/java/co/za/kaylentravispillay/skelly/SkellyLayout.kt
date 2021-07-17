@@ -3,6 +3,7 @@ package co.za.kaylentravispillay.skelly
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
+import co.za.kaylentravispillay.skelly.builder.SkellyBuilder
 import co.za.kaylentravispillay.skelly.delegate.SkellyDelegate
 import co.za.kaylentravispillay.skelly.delegate.impl.SkellyDelegateImpl
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -28,6 +29,10 @@ class SkellyLayout : ShimmerFrameLayout {
 
     override fun onDraw(canvas: Canvas?) {
         delegate.onDraw(canvas)
+    }
+
+    fun buildSkelly(buildLambda: SkellyBuilder.() -> Unit) {
+        delegate.setSkeleton(SkellyBuilder().apply(buildLambda).build(context))
     }
 
     fun enableShimmer(enable: Boolean) {
