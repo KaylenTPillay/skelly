@@ -1,0 +1,3 @@
+rootProject.name = "skelly"
+include ':app'
+include ':skelly'
