@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/skelly.iml" filepath="$PROJECT_DIR$/.idea/modules/skelly.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/skelly.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/skelly.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/skelly/skelly.skelly.iml" filepath="$PROJECT_DIR$/.idea/modules/skelly/skelly.skelly.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/skelly/skelly.skellylib.iml" filepath="$PROJECT_DIR$/.idea/modules/skelly/skelly.skellylib.iml" />
     </modules>
   </component>
 </project>
